@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {HelloWorld} from './components/Hello'
+import { Counter  } from './components/Counter';
+import './assets/styles/main.css';
 
 
 ReactDOM.render(
-  <HelloWorld  
-    name="Valhalla Coder" />,
+  <Counter />,
     document.getElementById("render-app")
-)
+);
