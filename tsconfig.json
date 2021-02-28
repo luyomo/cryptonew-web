@@ -1,0 +1,14 @@
+{
+    "include": ["./src/*"],
+    "compilerOptions": {
+        "sourceMap":false,
+        "target": "esnext",
+        "module": "esnext",
+        "jsx": "react",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "lib":["es2020", "dom"]
+    }
+}
