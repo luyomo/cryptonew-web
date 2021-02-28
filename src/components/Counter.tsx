@@ -23,7 +23,7 @@ export class Counter extends React.Component<{},CounterState> {
                 <hr/>
                 <div className="basic-padding">
                     <label>Increase: </label>
-                    <button onClick={() => this.handleIncrease()}>+</button>
+                    <button onClick={() => this.handleIncrease(1)}>+</button>
                 </div>
                 <br/>
                 <div className="basic-padding">
@@ -34,7 +34,7 @@ export class Counter extends React.Component<{},CounterState> {
         );
     }
 
-    handleIncrease(){
+    handleIncrease(num: number){
         // Increase Counter Function On Click
         const { value } = this.state;
         this.setState({ 
