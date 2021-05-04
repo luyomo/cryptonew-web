@@ -11,7 +11,7 @@ module.exports = {
         contentBase: "./src",
         port: 8080,
         progress: true,
-        host: "192.168.1.150"
+        host: "192.168.1.166"
         //host: "web01.51yomo.com"
     },
     module: {
@@ -19,7 +19,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 exclude: "/node_modules/",
-                use: ["style-loader", "css-loader", {loader: "less-loader", options: { lessOptions: {javacriptEnable: true} }}]
+                use: ["style-loader", "css-loader", {loader: "less-loader", options: { lessOptions: {javascriptEnabled: true} }}]
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -44,7 +44,7 @@ module.exports = {
                 use: ["babel-loader"]
             },
             {
-                test: /\.tsx$/,
+                test: /(\.tsx|\.tx)$/,
                 exclude: "/node_modules/",
                 use: [{
                     loader: 'ts-loader',
