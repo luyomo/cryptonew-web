@@ -38,12 +38,6 @@ module.exports = {
                 use: ["babel-loader"]
             },
             {
-                test: /\.js$/,
-                include: path.resolve(__dirname, 'src'),
-                exclude: "/node_modules/",
-                use: ["babel-loader"]
-            },
-            {
                 test: /(\.tsx|\.tx)$/,
                 exclude: "/node_modules/",
                 use: [{
