@@ -1,12 +1,16 @@
 import type { MenuDataItem } from '@ant-design/pro-layout'
 import ProLayout, { PageContainer } from '@ant-design/pro-layout'
-import { Input } from 'antd'
+import { Input, Avatar } from 'antd'
 import React, { useEffect, useState  } from "react"
 import { connect  } from "react-redux"
 import styled from "styled-components"
+import { LikeOutlined, UserOutlined } from '@ant-design/icons';
+import GoogleOAuth2 from './GoogleOAuth2'
 
 import menu from './data/menu'
 import TabsContainer from './TabsContainer'
+
+import logo from '../assets/btc.png'
 
 const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
   data
@@ -27,7 +31,6 @@ const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[]
 class MenuContainer extends React.Component {
   constructor(props) {
     super(props)
-    console.log(this.props.name)
   }
 
   onClickMenu (_event) {
@@ -47,6 +50,18 @@ class MenuContainer extends React.Component {
             )
           }
           menuDataRender={() => menu}
+          logo={logo}
+          title="加密货币实时新闻"
+          rightContentRender={() => (
+              <div >
+            <GoogleOAuth2 clientID="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com" />
+          </div>
+          )}
+          menuFooterRender={(props) => {
+            return (
+              <GoogleOAuth2 clientID="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com" />
+          );
+          }}
           menuProps={{ onSelect: this.onClickMenu }}
         >
           <TabsContainer />
@@ -56,7 +71,15 @@ class MenuContainer extends React.Component {
   } 
 }
 
-const mapStateToProps    = ( () => {})
-const mapDispatchToProps = ( () => {})
+//const mapStateToProps    = ( () => () => {} )
+function mapStateToProps (state) {
+  return {
+      ...state,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
  
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)

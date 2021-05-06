@@ -9,41 +9,28 @@ class GoogleOAuth2 extends Component {
   render() {
     let self = this;
     
-    function LoginModal() {   
-      return (
-        <>  
-          <Modal show={true}>
-            <Modal.Header>
-              <Modal.Title>Medium Tutorial</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <GoogleLogin
-                clientId={self.props.clientID}
-                buttonText="Sign in with Google"
-                onSuccess={self.props.googleOAuth2}
-                onFailure={self.props.googleOAuth2}
-                cookiePolicy={'single_host_origin'}
-                isSignedIn={true}
-              />              
-            </Modal.Body>
-          </Modal>
-        </>
-      );
-    }
-
     function LoggedIn(props) {
       return (
         <GoogleLogout
           clientId={self.props.clientID}
           buttonText="Logout"
           onLogoutSuccess={self.props.googleOAuth2}
+          style={{ width: 8, height: 8,  }}
         />
       );
     }
 
     function LoggedOut(props) {
       return (
-        <LoginModal />
+        <GoogleLogin
+         clientId={self.props.clientID}
+         buttonText="Sign in with Google"
+         onSuccess={self.props.googleOAuth2}
+         onFailure={self.props.googleOAuth2}
+         cookiePolicy={'single_host_origin'}
+         isSignedIn={true}
+         style={{ width: 8, height: 8,  }}
+        />              
       );     
     }
 

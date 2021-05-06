@@ -27,7 +27,16 @@ class TabsContainer extends React.Component{
     }
 }
 
-const mapStateToProps    = ( () => {} )
-const mapDispatchToProps = ( () => {} )
+//const mapStateToProps    = ( () => {} )
+function mapStateToProps (state) {
+   return {
+       ...state,
+   };
+ }
+
+//const mapDispatchToProps = ( () => {} )
+function mapDispatchToProps(dispatch) {
+    return {}
+}
  
 export default connect(mapStateToProps, mapDispatchToProps)(TabsContainer)
