@@ -5,3 +5,7 @@
 * Contents
 ** VET
 github:  https://github.com/vechain/thor
+
+* Reference
+** Google authentication(OAUTH2)
+https://medium.com/swlh/react-js-authentication-with-google-oauth2-using-redux-295c51868afb

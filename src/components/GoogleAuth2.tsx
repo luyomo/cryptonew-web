@@ -5,7 +5,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { Modal } from 'react-bootstrap';
 import { googleOAuth2 } from '../actions/google';
 
-class GoogleLogin extends Component {
+class GoogleAuth2 extends Component {
   render() {
     let self = this;
     
@@ -18,7 +18,7 @@ class GoogleLogin extends Component {
             </Modal.Header>
             <Modal.Body>
               <GoogleLogin
-                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                clientId="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com"
                 buttonText="Sign in with Google"
                 onSuccess={self.props.googleOAuth2}
                 onFailure={self.props.googleOAuth2}
@@ -34,7 +34,7 @@ class GoogleLogin extends Component {
     function LoggedIn(props) {
       return (
         <GoogleLogout
-          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+          clientId="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com"
           buttonText="Logout"
           onLogoutSuccess={self.props.googleOAuth2}
         />
@@ -71,4 +71,4 @@ function mapDispatchToProps (dispatch) {
   return bindActionCreators ({ googleOAuth2 }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleAuth2);
