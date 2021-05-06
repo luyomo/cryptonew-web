@@ -18,7 +18,7 @@ class GoogleOAuth2 extends Component {
             </Modal.Header>
             <Modal.Body>
               <GoogleLogin
-                clientId="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com"
+                clientId={self.props.clientID}
                 buttonText="Sign in with Google"
                 onSuccess={self.props.googleOAuth2}
                 onFailure={self.props.googleOAuth2}
@@ -34,7 +34,7 @@ class GoogleOAuth2 extends Component {
     function LoggedIn(props) {
       return (
         <GoogleLogout
-          clientId="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com"
+          clientId={self.props.clientID}
           buttonText="Logout"
           onLogoutSuccess={self.props.googleOAuth2}
         />
