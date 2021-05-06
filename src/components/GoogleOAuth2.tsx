@@ -5,7 +5,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { Modal } from 'react-bootstrap';
 import { googleOAuth2 } from '../actions/google';
 
-class GoogleAuth2 extends Component {
+class GoogleOAuth2 extends Component {
   render() {
     let self = this;
     
@@ -71,4 +71,4 @@ function mapDispatchToProps (dispatch) {
   return bindActionCreators ({ googleOAuth2 }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoogleAuth2);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleOAuth2);

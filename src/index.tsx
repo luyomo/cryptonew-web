@@ -10,14 +10,9 @@ import { composeWithDevTools  } from 'redux-devtools-extension';
 
 // Local library
 import rootReducer from "./reducers";
-import GoogleAuth2 from './components/GoogleAuth2'
+import GoogleOAuth2 from './components/GoogleOAuth2'
 
 //store
 let store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-render(
-    <Provider store={store}>
-        <GoogleAuth2 />
-    </Provider>,
-    document.getElementById('root')
-)
+render( <Provider store={store}> <GoogleOAuth2 /> </Provider>, document.getElementById('root'))
