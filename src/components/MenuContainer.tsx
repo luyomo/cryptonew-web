@@ -1,16 +1,20 @@
-import type { MenuDataItem } from '@ant-design/pro-layout'
-import ProLayout, { PageContainer } from '@ant-design/pro-layout'
-import { Input, Avatar } from 'antd'
+import type { MenuDataItem }           from '@ant-design/pro-layout'
+import ProLayout, { PageContainer }    from '@ant-design/pro-layout'
+import { Input }                       from 'antd'
 import React, { useEffect, useState  } from "react"
-import { connect  } from "react-redux"
-import styled from "styled-components"
-import { LikeOutlined, UserOutlined } from '@ant-design/icons';
-import GoogleOAuth2 from './GoogleOAuth2'
+import { bindActionCreators  }         from 'redux'
+import { connect  }                    from "react-redux"
+import styled                          from "styled-components"
 
-import menu from './data/menu'
-import TabsContainer from './TabsContainer'
+// Local library
+import menu                            from './data/menu'
+import TabsContainer                   from './TabsContainer'
+import ListContainer                   from './ListContainer'
+import GoogleOAuth2                    from './GoogleOAuth2'
+import { TabsActionTypes }             from "../types/constants"
 
-import logo from '../assets/btc.png'
+// Assets
+import logo                            from '../assets/btc.png'
 
 const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
   data
@@ -30,11 +34,30 @@ const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[]
 
 class MenuContainer extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    console.log("Printing the data ---------- ");
+    console.log(this.props);
+    const { dispatch  } = props
+    console.log("The dispatch function here ")
+    console.log(dispatch)
+    this.onClickMenu = this.onClickMenu.bind(this);
+  }
+
+  componentDidMount() {
+    let { dispatch } = this.props
+    console.log("Printing in the componentdidmount")
+    console.log(dispatch)
+
+    //let action = TodoActionCreators.addTodo('Use Redux')
+    //dispatch(action)
   }
 
   onClickMenu (_event) {
     console.log("Clicked on the event")
+    console.log(this.props.test)
+    this.props.test01()
+    console.log(_event)
+    console.log(this.props);
   }
   render() {
     return (
@@ -64,22 +87,26 @@ class MenuContainer extends React.Component {
           }}
           menuProps={{ onSelect: this.onClickMenu }}
         >
-          <TabsContainer />
+          <ListContainer />
         </ProLayout>
       </div>
     )
   } 
 }
+          //<TabsContainer />
 
-//const mapStateToProps    = ( () => () => {} )
 function mapStateToProps (state) {
   return {
-      ...state,
+      tabsReducer: state.tabsReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    test: (_value) => {dispatch({type: "test_value", payload: _value})},
+    test01: bindActionCreators((_value) => {return {type: "test_value", payload: _value}}, dispatch) 
+  }
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)
+//export default connect(mapStateToProps)(MenuContainer)

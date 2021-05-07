@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component }          from 'react';
+import { connect }                   from 'react-redux';
+import { bindActionCreators }        from 'redux';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { Modal } from 'react-bootstrap';
-import { googleOAuth2 } from '../actions/google';
+import { Modal }                     from 'react-bootstrap';
+import { googleOAuth2 }              from '../actions/google';
 
 class GoogleOAuth2 extends Component {
   render() {
