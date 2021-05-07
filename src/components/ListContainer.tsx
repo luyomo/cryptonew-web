@@ -4,8 +4,8 @@ import React                              from "react"
 import reqwest                            from 'reqwest'
 
 const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
-//const fakeDataUrl = `https://cryptopanic.com/api/v1/posts/?auth_token=86e4c7e61af0a83779442aaf5812feebda935b4d&kind=news&filter=important`;
+//const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+const fakeDataUrl = `/cryptonews-api/cryptonews?results=3`;
 
 class ListContainer extends React.Component {
   state = {
@@ -18,7 +18,7 @@ class ListContainer extends React.Component {
   componentDidMount() {
     this.getData(res => {
       console.log("Coming to fetch the data ")
-      console.log(res)
+      console.log(res.results)
       this.setState({
         initLoading: false,
         data: res.results,
@@ -96,8 +96,8 @@ class ListContainer extends React.Component {
                 avatar={
                   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 }
-                title={<a href="https://ant.design">{item.name.last}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                title={<a href={item.url}>{item.title_chinese}</a>}
+                description={item.title_chinese}
               />
               <div>content</div>
             </Skeleton>
