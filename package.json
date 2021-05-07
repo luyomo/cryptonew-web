@@ -51,6 +51,7 @@
     "@types/redux": "^3.6.0",
     "antd": "^4.12.3",
     "install": "^0.13.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",

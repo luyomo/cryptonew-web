@@ -2,10 +2,11 @@ import { List, Avatar, Button, Skeleton } from 'antd';
 import { connect                        } from "react-redux"
 import React                              from "react"
 import reqwest                            from 'reqwest'
+import * as _ from "lodash"
 
 const count = 3;
 //const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
-const fakeDataUrl = `/cryptonews-api/cryptonews?results=3`;
+const fakeDataUrl = `/cryptonews-api/cryptonews?results=${count}`;
 
 class ListContainer extends React.Component {
   state = {
@@ -16,7 +17,7 @@ class ListContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getData(res => {
+    this.getData(1000000000, res => {
       console.log("Coming to fetch the data ")
       console.log(res.results)
       this.setState({
@@ -27,9 +28,9 @@ class ListContainer extends React.Component {
     });
   }
 
-  getData = callback => {
+  getData = (_id, callback) => {
     reqwest({
-      url: fakeDataUrl,
+      url: fakeDataUrl + "&id=" + _id,
       type: 'json',
       method: 'get',
       contentType: 'application/json',
@@ -44,7 +45,9 @@ class ListContainer extends React.Component {
       loading: true,
       list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
     });
-    this.getData(res => {
+    var __minID = _.minBy(this.state.data, _entry => {return _entry.id }) 
+    console.log("The min id is ", __minID);
+    this.getData(__minID['id'], res => {
       const data = this.state.data.concat(res.results);
       this.setState(
         {
