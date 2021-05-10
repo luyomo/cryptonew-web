@@ -4,7 +4,24 @@ import React                              from "react"
 import reqwest                            from 'reqwest'
 import * as _ from "lodash"
 
-const count = 3;
+// Assets
+import BNBLogo                            from '../assets/bnb.png'
+import DOGELogo                           from '../assets/doge.jpg'
+import BTCLogo                            from '../assets/btc.jpg'
+import SOLLogo                            from '../assets/sol.png'
+import ETHLogo                            from '../assets/eth.png'
+import ADALogo                            from '../assets/ada.png'
+
+const LOGOContainer = {
+    "BNB" : BNBLogo
+  , "DOGE": DOGELogo
+  , "BTC" : BTCLogo
+  , "SOL" : SOLLogo
+  , "ETH" : ETHLogo
+  , "ADA" : ADALogo
+}
+
+const count = 10;
 //const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
 const fakeDataUrl = `/cryptonews-api/cryptonews?results=${count}`;
 
@@ -91,18 +108,14 @@ class ListContainer extends React.Component {
         loadMore={loadMore}
         dataSource={list}
         renderItem={item => (
-          <List.Item
-            actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-          >
+          <List.Item >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                }
-                title={<a href={item.url}>{item.title_chinese}</a>}
+                avatar={ <Avatar src={LOGOContainer[item.currencies.split(',')[0]]} /> }
+                title={<a href={item.url} target="_blank">{item.title}</a>}
                 description={item.title_chinese}
               />
-              <div>content</div>
+              <div>{item.currencies}</div>
             </Skeleton>
           </List.Item>
         )}

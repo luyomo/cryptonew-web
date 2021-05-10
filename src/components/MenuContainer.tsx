@@ -1,9 +1,9 @@
-import type { MenuDataItem }           from '@ant-design/pro-layout'
-import ProLayout, { PageContainer }    from '@ant-design/pro-layout'
-import { Input }                       from 'antd'
+import type { MenuDataItem           } from '@ant-design/pro-layout'
+import ProLayout, { PageContainer    } from '@ant-design/pro-layout'
+import { Input                       } from 'antd'
 import React, { useEffect, useState  } from "react"
-import { bindActionCreators  }         from 'redux'
-import { connect  }                    from "react-redux"
+import { bindActionCreators          } from 'redux'
+import { connect                     } from "react-redux"
 import styled                          from "styled-components"
 
 // Local library
@@ -12,9 +12,13 @@ import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
 import { TabsActionTypes }             from "../types/constants"
+import Cookies                         from 'universal-cookie';
 
 // Assets
-import logo                            from '../assets/btc.png'
+import logo                            from '../assets/btcLogo.png'
+
+
+const cookies = new Cookies();
 
 const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
   data
@@ -47,6 +51,7 @@ class MenuContainer extends React.Component {
     let { dispatch } = this.props
     console.log("Printing in the componentdidmount")
     console.log(dispatch)
+    console.log(cookies)
 
     //let action = TodoActionCreators.addTodo('Use Redux')
     //dispatch(action)
@@ -54,7 +59,7 @@ class MenuContainer extends React.Component {
 
   onClickMenu (_event) {
     console.log("Clicked on the event")
-    console.log(this.props.test)
+    console.log(this.props)
     this.props.test01()
     console.log(_event)
     console.log(this.props);
@@ -97,7 +102,8 @@ class MenuContainer extends React.Component {
 
 function mapStateToProps (state) {
   return {
-      tabsReducer: state.tabsReducer,
+      tabsReducer  : state.tabsReducer,
+      googleReducer: state.googleReducer,
   };
 }
 

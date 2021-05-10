@@ -1,3 +1,5 @@
+import jwt_decode        from "jwt-decode";
+
 import { GOOGLE_OAUTH2 } from "../types/constants";
 
 export const googleOAuth2 = (googleResponse) => {
