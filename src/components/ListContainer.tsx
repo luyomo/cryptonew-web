@@ -2,7 +2,7 @@ import { List, Avatar, Button, Skeleton } from 'antd';
 import { connect                        } from "react-redux"
 import React                              from "react"
 import reqwest                            from 'reqwest'
-import * as _ from "lodash"
+import * as _                             from "lodash"
 
 // Assets
 import BNBLogo                            from '../assets/bnb.png'

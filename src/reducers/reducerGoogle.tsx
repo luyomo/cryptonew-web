@@ -1,8 +1,6 @@
-import { GOOGLE_OAUTH2 } from "../types/constants";
+import { GOOGLE_OAUTH2, GOOGLE_INIT_STATE } from "../types/constants";
 
-const initialState = [];
-
-export const googleReducer = (state = initialState, action) => {
+export const googleReducer = (state = GOOGLE_INIT_STATE, action) => {
   switch (action.type) {
     case GOOGLE_OAUTH2: {
       return action.googleResponse;

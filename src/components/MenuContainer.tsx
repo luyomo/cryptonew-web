@@ -11,11 +11,12 @@ import menu                            from './data/menu'
 import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
-import { TabsActionTypes }             from "../types/constants"
-import Cookies                         from 'universal-cookie';
+import { TabsActionTypes             } from "../types/constants"
+import Cookies                         from 'universal-cookie'
 
 // Assets
 import logo                            from '../assets/btcLogo.png'
+import userLogo                        from '../assets/user.jpg'
 
 
 const cookies = new Cookies();
@@ -50,8 +51,7 @@ class MenuContainer extends React.Component {
   componentDidMount() {
     let { dispatch } = this.props
     console.log("Printing in the componentdidmount")
-    console.log(dispatch)
-    console.log(cookies)
+    console.log(this.props)
 
     //let action = TodoActionCreators.addTodo('Use Redux')
     //dispatch(action)
@@ -62,7 +62,8 @@ class MenuContainer extends React.Component {
     console.log(this.props)
     this.props.test01()
     console.log(_event)
-    console.log(this.props);
+    //console.log(this.props.googleReducer.ft.Qt);
+    console.log(this.props.googleReducer.ft);
   }
   render() {
     return (
@@ -81,9 +82,7 @@ class MenuContainer extends React.Component {
           logo={logo}
           title="加密货币实时新闻"
           rightContentRender={() => (
-              <div >
-            <GoogleOAuth2 clientID="162023813570-ir8c6j1hvrinc70qb5c8sv4mlkltgd28.apps.googleusercontent.com" />
-          </div>
+              <div>{this.props.googleReducer.ft.Ue},欢迎来到加密货币实时新闻网 <img src={ this.props.googleReducer.ft.iJ } width="40" height="45" /></div>
           )}
           menuFooterRender={(props) => {
             return (
