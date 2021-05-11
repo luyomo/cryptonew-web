@@ -12,14 +12,10 @@ import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
 import { TabsActionTypes             } from "../types/constants"
-import Cookies                         from 'universal-cookie'
 
 // Assets
 import logo                            from '../assets/btcLogo.png'
 import userLogo                        from '../assets/user.jpg'
-
-
-const cookies = new Cookies();
 
 const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
   data
@@ -82,13 +78,14 @@ class MenuContainer extends React.Component {
           }}
           menuProps={{ onSelect: this.onClickMenu }}
         >
-          <ListContainer />
+          <ListContainer count="5" startId="0" url="/cryptonews-api/referenceinfo" />
         </ProLayout>
       </div>
     )
   } 
 }
           //<TabsContainer />
+          //<ListContainer count="5" url= "/cryptonews-api/cryptonews" />
 
 function mapStateToProps (state) {
   return {

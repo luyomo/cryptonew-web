@@ -3,6 +3,11 @@ export default [
     path: '/crypto_news',
     name: '实时新闻',
     locale: 'menu.crypto_news',
+    attributes: {
+      count: "5"
+      startId: "1000000000" 
+      url: "/cryptonews-api/cryptonews"
+    }
   },
   {
     path: '/bian_info',
@@ -25,5 +30,10 @@ export default [
     path: '/other',
     name: '参考信息',
     locale: 'menu.other',
+    attributes: {
+      count: "5"
+      startId: "0" 
+      url: "/cryptonews-api/referenceinfo"
+    }
   },
 ];

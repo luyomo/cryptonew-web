@@ -27,11 +27,15 @@ const LOGOContainer = {
   , "USDC": USDCLogo
 }
 
-const count = 10;
-//const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
-const fakeDataUrl = `/cryptonews-api/cryptonews?results=${count}`;
-
 class ListContainer extends React.Component {
+  constructor(props){
+    super(props)
+    console.log("----- ----- -----")
+    console.log(this.props)
+    console.log("----- ----- -----")
+    this.getData = this.getData.bind(this)
+  }
+
   state = {
     initLoading: true,
     loading: false,
@@ -40,7 +44,7 @@ class ListContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getData(1000000000, res => {
+    this.getData(this.props.startId, res => {
       console.log("Coming to fetch the data ")
       console.log(res.results)
       this.setState({
@@ -52,8 +56,11 @@ class ListContainer extends React.Component {
   }
 
   getData = (_id, callback) => {
+    console.log("----- getData----")
+    console.log(this.props.url)
+    console.log("----- ----- -----")
     reqwest({
-      url: fakeDataUrl + "&id=" + _id,
+      url: this.props.url + "?results=" + this.props.count + "&id=" + _id,
       type: 'json',
       method: 'get',
       contentType: 'application/json',
@@ -66,7 +73,7 @@ class ListContainer extends React.Component {
   onLoadMore = () => {
     this.setState({
       loading: true,
-      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
+      list: this.state.data.concat([...new Array(this.props.count)].map(() => ({ loading: true, name: {} }))),
     });
     var __minID = _.minBy(this.state.data, _entry => {return _entry.id }) 
     console.log("The min id is ", __minID);
@@ -90,8 +97,6 @@ class ListContainer extends React.Component {
 
   render() {
     const { initLoading, loading, list } = this.state;
-    console.log("--------------")
-    console.log(list)
     const loadMore =
       !initLoading && !loading ? (
         <div
@@ -117,11 +122,11 @@ class ListContainer extends React.Component {
           <List.Item >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                avatar={ <Avatar src={item.currencies?LOGOContainer[item.currencies.split(',')[0]]:BTCLogo } /> }
+                avatar={ <Avatar src={item.avatar?LOGOContainer[item.avatar.split(',')[0]]:BTCLogo } /> }
                 title={<a href={item.url} target="_blank">{item.title}</a>}
-                description={item.title_chinese}
+                description={item.description}
               />
-              <div>{item.currencies}</div>
+              <div>{item.content}</div>
             </Skeleton>
           </List.Item>
         )}
