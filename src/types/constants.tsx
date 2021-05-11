@@ -10,7 +10,7 @@ export const GOOGLE_INIT_STATE = {ft: {
 // 2. Menu definition
 export const MENU_SWITCH = "MENU_SWITCH"
 export const MENU_INIT_STATE = {
-    contentType: "ListContainer"
+    type: "ListContainer"
   , url: "/cryptonews-api/cryptonews"
   , count: "10"
   , startId: "1000000000"

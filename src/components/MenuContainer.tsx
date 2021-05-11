@@ -10,6 +10,7 @@ import styled                          from "styled-components"
 import menu                            from './data/menu'
 import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
+import TableContainer                  from './TableContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
 import { TabsActionTypes             } from "../types/constants"
 import { ACTION_MENU_SWITCH          } from '../actions/menu'
@@ -65,6 +66,13 @@ class MenuContainer extends React.Component {
     //console.log(this.props.googleReducer.ft);
   }
   render() {
+    let container
+    if (this.props.menuReducer.type === "ListContainer") {
+      container = <ListContainer count={ this.props.menuReducer.count  } startId={ this.props.menuReducer.startId  } url={ this.props.menuReducer.url   } /> 
+    }else if(this.props.menuReducer.type === "TableContainer"){
+      container = <TableContainer />
+    }
+
     return (
       <div style={{ height: '100vh', }} >
         <ProLayout location={{ pathname: '/home/overview', }}
@@ -81,7 +89,8 @@ class MenuContainer extends React.Component {
           }}
           menuProps={{ onSelect: this.onClickMenu }}
         >
-          <ListContainer count={ this.props.menuReducer.count } startId={ this.props.menuReducer.startId } url={ this.props.menuReducer.url  } />
+
+          {container}
         </ProLayout>
       </div>
     )
@@ -89,6 +98,7 @@ class MenuContainer extends React.Component {
 }
           //<TabsContainer />
           //<ListContainer count="5" url= "/cryptonews-api/cryptonews" />
+          //<ListContainer count={ this.props.menuReducer.count } startId={ this.props.menuReducer.startId } url={ this.props.menuReducer.url  } />
 
 function mapStateToProps (state) {
   return {
