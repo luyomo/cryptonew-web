@@ -1,24 +1,5 @@
 export default [
   {
-    path: '/home',
-    name: '首页',
-    locale: 'menu.home',
-    children: [
-      {
-        path: '/home/overview',
-        name: '概述',
-        hideInMenu: true,
-        locale: 'menu.home.overview',
-      },
-      {
-        path: '/home/search',
-        name: '搜索',
-        hideInMenu: true,
-        locale: 'menu.home.search',
-      },
-    ],
-  },
-  {
     path: '/crypto_news',
     name: '实时新闻',
     locale: 'menu.crypto_news',

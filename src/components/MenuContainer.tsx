@@ -69,15 +69,6 @@ class MenuContainer extends React.Component {
     return (
       <div style={{ height: '100vh', }} >
         <ProLayout location={{ pathname: '/home/overview', }}
-          menuExtraRender={({ collapsed }) =>
-            !collapsed && (
-              <Input.Search
-                onSearch={(e) => {
-                  setKeyWord(e)
-                }}
-              />
-            )
-          }
           menuDataRender={() => menu}
           logo={logo}
           title="加密货币实时新闻"

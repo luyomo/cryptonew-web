@@ -11,6 +11,9 @@ import BTCLogo                            from '../assets/btc.jpg'
 import SOLLogo                            from '../assets/sol.png'
 import ETHLogo                            from '../assets/eth.png'
 import ADALogo                            from '../assets/ada.png'
+import XRPLogo                            from '../assets/xrp.jpg'
+import DOTLogo                            from '../assets/dot.png'
+import USDCLogo                           from '../assets/usdc.png'
 
 const LOGOContainer = {
     "BNB" : BNBLogo
@@ -19,6 +22,9 @@ const LOGOContainer = {
   , "SOL" : SOLLogo
   , "ETH" : ETHLogo
   , "ADA" : ADALogo
+  , "XRP" : XRPLogo
+  , "DOT" : DOTLogo
+  , "USDC": USDCLogo
 }
 
 const count = 10;
@@ -111,7 +117,7 @@ class ListContainer extends React.Component {
           <List.Item >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                avatar={ <Avatar src={LOGOContainer[item.currencies.split(',')[0]]} /> }
+                avatar={ <Avatar src={item.currencies?LOGOContainer[item.currencies.split(',')[0]]:BTCLogo } /> }
                 title={<a href={item.url} target="_blank">{item.title}</a>}
                 description={item.title_chinese}
               />
