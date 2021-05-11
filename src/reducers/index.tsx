@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import { googleReducer }   from "./reducerGoogle"
-import { tabsReducer }     from "./reducerTabs"
+import { menuReducer }     from "./reducerMenu"
 
 const rootReducer = combineReducers({
-    googleReducer, tabsReducer
+    googleReducer, menuReducer
 });
 
 export default rootReducer;

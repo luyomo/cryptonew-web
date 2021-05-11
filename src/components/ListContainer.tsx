@@ -33,7 +33,8 @@ class ListContainer extends React.Component {
     console.log("----- ----- -----")
     console.log(this.props)
     console.log("----- ----- -----")
-    this.getData = this.getData.bind(this)
+    this.getData     = this.getData.bind(this)
+    this.refreshData = this.refreshData.bind(this)
   }
 
   state = {
@@ -44,16 +45,21 @@ class ListContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getData(this.props.startId, res => {
-      console.log("Coming to fetch the data ")
-      console.log(res.results)
-      this.setState({
-        initLoading: false,
-        data: res.results,
-        list: res.results,
-      });
-    });
+    this.refreshData()
   }
+
+  refreshData() {
+      this.getData(this.props.startId, res => {
+        console.log("Coming to fetch the data ")
+        console.log(res.results)
+        this.setState({
+          initLoading: false,
+          data: res.results,
+          list: res.results,
+          url: this.props.url
+        });
+      });
+    }
 
   getData = (_id, callback) => {
     console.log("----- getData----")
@@ -96,6 +102,12 @@ class ListContainer extends React.Component {
   };
 
   render() {
+    console.log("---------- Print the call message in the ListContainer")
+    console.log(this.props)
+    console.log(this.state)
+    if(this.state.url !== this.props.url) {
+      this.refreshData()
+    }
     const { initLoading, loading, list } = this.state;
     const loadMore =
       !initLoading && !loading ? (

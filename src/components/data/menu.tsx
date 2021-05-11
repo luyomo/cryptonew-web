@@ -4,8 +4,8 @@ export default [
     name: '实时新闻',
     locale: 'menu.crypto_news',
     attributes: {
-      count: "5"
-      startId: "1000000000" 
+      count: "10",
+      startId: "1000000000", 
       url: "/cryptonews-api/cryptonews"
     }
   },
@@ -31,8 +31,8 @@ export default [
     name: '参考信息',
     locale: 'menu.other',
     attributes: {
-      count: "5"
-      startId: "0" 
+      count: "10",
+      startId: "0", 
       url: "/cryptonews-api/referenceinfo"
     }
   },

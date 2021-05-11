@@ -1,9 +1,10 @@
-import { Tabs } from 'antd'
+import { Tabs                       } from 'antd'
 import React, { useEffect, useState } from "react"
-import { connect   } from "react-redux"
+import { connect                    } from "react-redux"
 import styled from "styled-components"
 
 const { TabPane } = Tabs
+import { MENU_SWITCH                } from '../actions/menu';
 
 function callback(key) {
   console.log(key)

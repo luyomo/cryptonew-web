@@ -12,6 +12,7 @@ import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
 import { TabsActionTypes             } from "../types/constants"
+import { ACTION_MENU_SWITCH          } from '../actions/menu'
 
 // Assets
 import logo                            from '../assets/btcLogo.png'
@@ -54,12 +55,14 @@ class MenuContainer extends React.Component {
   }
 
   onClickMenu (_event) {
-    console.log("Clicked on the event")
+    console.log("---- 001.   Clicked on the event")
     console.log(this.props)
-    this.props.test01()
-    console.log(_event)
+    //this.props.test01()
+    console.log(_event.key)
+    this.props.ACTION_MENU_SWITCH(_event.key)
+    console.log(this.props)
     //console.log(this.props.googleReducer.ft.Qt);
-    console.log(this.props.googleReducer.ft);
+    //console.log(this.props.googleReducer.ft);
   }
   render() {
     return (
@@ -78,7 +81,7 @@ class MenuContainer extends React.Component {
           }}
           menuProps={{ onSelect: this.onClickMenu }}
         >
-          <ListContainer count="5" startId="0" url="/cryptonews-api/referenceinfo" />
+          <ListContainer count={ this.props.menuReducer.count } startId={ this.props.menuReducer.startId } url={ this.props.menuReducer.url  } />
         </ProLayout>
       </div>
     )
@@ -89,16 +92,13 @@ class MenuContainer extends React.Component {
 
 function mapStateToProps (state) {
   return {
-      tabsReducer  : state.tabsReducer,
+      menuReducer  : state.menuReducer,
       googleReducer: state.googleReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    test: (_value) => {dispatch({type: "test_value", payload: _value})},
-    test01: bindActionCreators((_value) => {return {type: "test_value", payload: _value}}, dispatch) 
-  }
+  return bindActionCreators ({ ACTION_MENU_SWITCH }, dispatch);
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)
