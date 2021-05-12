@@ -1,18 +1,25 @@
-import menu   from '../components/data/menu'
-import * as _ from 'lodash'
+import menu                              from '../components/data/menu'
 import { MENU_SWITCH, MENU_INIT_STATE  } from "../types/constants";
+
+function findEntry(_path, _root){
+    for (var _entry of _root){
+        if (_entry["children"] !== undefined){
+            let __ret = findEntry(_path, _entry['children'])
+            if ( __ret !== undefined ) return __ret
+        }else{
+            if(_entry['path'] === _path) return _entry['attributes']
+        }
+    }
+    return undefined
+}
 
 export const ACTION_MENU_SWITCH = (_path) => {
     return async (dispatch) => {
-        console.log("----- printing the menu")
-        console.log("This is the path " + _path)
-        let  __entry = _.filter(menu, { 'path': _path });
-        //console.log(__entry)
-        let  __res = MENU_INIT_STATE
-        if ( _.size(__entry) > 0 ){
-            __res = __entry[0].attributes
+        let __entry = findEntry(_path, menu)
+        if (__entry === undefined){
+            dispatch({ type: MENU_SWITCH, payload: MENU_INIT_STATE});
+        }else{
+            dispatch({ type: MENU_SWITCH, payload: __entry});
         }
-        console.log(__res)
-        dispatch({ type: MENU_SWITCH, payload: __res});
     };
 };
