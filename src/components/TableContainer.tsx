@@ -3,6 +3,7 @@ import { Button, Tooltip, Dropdown, Menu, Input } from 'antd';
 import { EllipsisOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-table';
 import ProTable, { TableDropdown } from '@ant-design/pro-table';
+import reqwest                            from 'reqwest'
 
 const valueEnum = {
   0: 'close',
@@ -136,6 +137,19 @@ const menu = (
   </Menu>
 );
 
+function requestBianapi(){
+  console.log("testing in the request bian api");
+     reqwest({
+       url: '/api/v3/exchangeInfo',
+       type: 'json',
+       method: 'get',
+       contentType: 'application/json',
+       success: res => {
+         console.log(res);
+       },
+     });
+}
+
 export default () => {
   return (
     <ProTable<TableListItem>
@@ -165,7 +179,7 @@ export default () => {
         <Button key="danger" danger>
           危险按钮
         </Button>,
-        <Button key="show">查看日志</Button>,
+        <Button key="show" onClick={requestBianapi}>查看日志</Button>,
         <Button type="primary" key="primary">
           创建应用
         </Button>,
