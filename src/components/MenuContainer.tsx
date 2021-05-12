@@ -12,47 +12,24 @@ import TabsContainer                   from './TabsContainer'
 import ListContainer                   from './ListContainer'
 import TableContainer                  from './TableContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
-import { TabsActionTypes             } from "../types/constants"
+//import { TabsActionTypes             } from "../types/constants"
 import { ACTION_MENU_SWITCH          } from '../actions/menu'
 
 // Assets
 import logo                            from '../assets/btcLogo.png'
 import userLogo                        from '../assets/user.jpg'
 
-const filterByMenuDate = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
-  data
-    .map((item) => {
-      if (
-        (item.name && item.name.includes(keyWord)) ||
-        filterByMenuDate(item.children || [], keyWord).length > 0
-      ) {
-        return {
-          ...item,
-          children: filterByMenuDate(item.children || [], keyWord),
-        }
-      }
-      return undefined
-    })
-    .filter((item) => item) as MenuDataItem[]
-
 class MenuContainer extends React.Component {
   constructor(props) {
     super(props);
-    console.log("Printing the data ---------- ");
-    console.log(this.props);
     const { dispatch  } = props
-    console.log("The dispatch function here ")
-    console.log(dispatch)
     this.onClickMenu = this.onClickMenu.bind(this);
   }
 
   componentDidMount() {
     let { dispatch } = this.props
-    console.log("Printing in the componentdidmount")
     console.log(this.props)
 
-    //let action = TodoActionCreators.addTodo('Use Redux')
-    //dispatch(action)
   }
 
   onClickMenu (_event) {
@@ -62,8 +39,6 @@ class MenuContainer extends React.Component {
     console.log(_event.key)
     this.props.ACTION_MENU_SWITCH(_event.key)
     console.log(this.props)
-    //console.log(this.props.googleReducer.ft.Qt);
-    //console.log(this.props.googleReducer.ft);
   }
   render() {
     let container

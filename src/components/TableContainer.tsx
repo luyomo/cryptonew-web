@@ -6,6 +6,7 @@ import ProTable, { TableDropdown } from '@ant-design/pro-table';
 
 //import { requestBianapi } from '../javascripts/bianapi'
 import { bianBase } from '../javascripts/bianapi/bianapi'
+import ModalContainer from './ModalContainer'
 
 let _insBianApi = new bianBase("test01", "test02")
 
@@ -180,18 +181,8 @@ export default () => {
         tooltip: '这是一个标题提示',
       }}
       toolBarRender={() => [
-        <Button key="danger" danger>
-          危险按钮
-        </Button>,
-        <Button key="show" onClick={() => {  _insBianApi.sendPublicRequest("test", 'testKey')  }}>查看日志</Button>,
-        <Button type="primary" key="primary">
-          创建应用
-        </Button>,
-        <Dropdown key="menu" overlay={menu}>
-          <Button>
-            <EllipsisOutlined />
-          </Button>
-        </Dropdown>,
+        <ModalContainer />,
+        <Button type="primary" key="primary" onClick={() => {  _insBianApi.sendPublicRequest("test", 'testKey')  }}>查看日志</Button>,
       ]}
     />
   );

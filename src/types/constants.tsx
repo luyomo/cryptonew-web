@@ -16,29 +16,7 @@ export const MENU_INIT_STATE = {
   , startId: "1000000000"
 }
 
-export interface ITabEntity {
-    tabName: string,
-    tabType: string,
-}
+//3. Modal key
+export const BINANCE_KEY_INPUT = "BINANCE_KEY_INPUT"
+export const BINANCE_INIT_STATE = { apiKey: "", apiSecretKey: ""}
 
-export interface IMenuEntity {
-    id?:         number,
-    path?:       string,
-    name?:       string,
-    locale?:     string,
-    menuName?:   string,
-    component?:  string,
-    hideInMenu?: boolean,
-    collapsed?:  boolean,
-    children?:   IMenuEntity[],
-    tabs?:       ITabEntity[],
-}
-
-export enum TabsActionTypes {
-    TAB_SWITCH_MENU = "@@tabs/SWITCH_MENU",
-}
-
-export interface TabsState {
-    readonly menuName: string,
-    readonly data: ITabEntity[]
-}

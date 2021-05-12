@@ -1,17 +1,6 @@
 import reqwest                            from 'reqwest'
-
-//export const requestBianapi = () => {
-//   console.log("testing in the request bian api");
-//      reqwest({
-//        url: '/api/v3/exchangeInfo',
-//        type: 'json',
-//        method: 'get',
-//        contentType: 'application/json',
-//        success: res => {
-//          console.log(res);
-//        },
-//      });
-// }
+import * as _                             from 'lodash'
+import CryptoJS                           from 'crypto-js'
 
 export class bianBase {
     constructor(_apiKey, _apiSecretKey){
@@ -26,6 +15,43 @@ export class bianBase {
             type: 'json',
             method: 'get',
             contentType: 'application/json',
+            success: res => {
+              console.log(res);
+            },
+        });
+    }
+
+    getHmacRequest(_uri, _request) {
+        this.sendHmacRequest('get', _uri, _request)
+    }
+
+    postHmacRequest(_uri, _request) {
+        this.sendHmacRequest('post', _uri, _request)
+    }
+
+    sendHmacRequest(_method, _uri, _request) {
+        // Get the current epoch time
+        const __currentEpochTS = Date.now()
+ 
+        // Merge current timestamp to request
+        _request = _.assignIn(_request, {'timestamp' : __currentEpochTS})
+
+        let _arr = []
+        _.forEach(_request, function(_v, _k) {_arr.push(_k + "=" + _v)})
+        const __strRequest = _.join(_arr, "&")
+ 
+        // Get the signed request
+        const __signature =  CryptoJS.HmacSHA256(__strRequest, this.apiSecretKey ).toString(CryptoJS.enc.Hex)
+
+        reqwest({
+            url: _uri + '?' + __strRequest + '&signature=' + __signature,
+            type: 'json',
+            method: _method,
+            contentType: 'application/json',
+            headers: { 'X-MBX-APIKEY': this.apiKey },
+            error: function (err) {
+                console.log(err.response)
+            },
             success: res => {
               console.log(res);
             },

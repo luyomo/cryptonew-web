@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
-import { googleReducer }   from "./reducerGoogle"
-import { menuReducer }     from "./reducerMenu"
+import { googleReducer   } from "./reducerGoogle"
+import { menuReducer     } from "./reducerMenu"
+import { modalReducer    } from "./reducerModal"
 
 const rootReducer = combineReducers({
-    googleReducer, menuReducer
+    googleReducer, menuReducer, modalReducer
 });
 
 export default rootReducer;
