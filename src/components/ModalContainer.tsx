@@ -52,14 +52,14 @@ class ModalContainer extends React.Component {
   }
 }
 
- function mapStateToProps (state) {
-   return {
-       modalReducer: state.modalReducer,
-   };
- }
- 
- function mapDispatchToProps(dispatch) {
-   return bindActionCreators ({ ACTION_MODAL_KEY }, dispatch);
- }
- 
- export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer)
+function mapStateToProps (state) {
+  return {
+      modalReducer: state.modalReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators ({ ACTION_MODAL_KEY }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer)

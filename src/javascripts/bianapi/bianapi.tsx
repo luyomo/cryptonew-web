@@ -11,6 +11,11 @@ export class bianBase {
 
     sendPublicRequest(_uri, _request){
         console.log("Calling in the sendPublicRequest")
+        console.log("The key is as below")
+        console.log(this.apiKey)
+        console.log(this.apiSecretKey)
+        console.log(_uri)
+        console.log(_request)
         reqwest({
             url: '/api/v3/time',
             type: 'json',

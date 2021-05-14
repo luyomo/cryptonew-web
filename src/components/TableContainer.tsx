@@ -1,11 +1,14 @@
-import React from 'react';
-import { Button, Tooltip, Dropdown, Menu, Input } from 'antd';
+import React                                                        from 'react';
+import { connect                                                  } from "react-redux"
+import { bindActionCreators                                       } from 'redux'
+import { Button, Tooltip, Dropdown, Menu, Input                   } from 'antd';
 import { EllipsisOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
-import type { ProColumns } from '@ant-design/pro-table';
-import ProTable, { TableDropdown } from '@ant-design/pro-table';
+import type { ProColumns                                          } from '@ant-design/pro-table';
+import ProTable, { TableDropdown                                  } from '@ant-design/pro-table';
 
 //import { requestBianapi } from '../javascripts/bianapi'
 import { bianBase } from '../javascripts/bianapi/bianapi'
+import { userInfo } from '../javascripts/bianapi/userInfo'
 import ModalContainer from './ModalContainer'
 
 let _insBianApi = new bianBase("test01", "test02")
@@ -155,37 +158,53 @@ const menu = (
 //     });
 //}
 
-export default () => {
-  return (
-    <ProTable<TableListItem>
-      columns={columns}
-      request={(params, sorter, filter) => {
-        // 表单搜索项会从 params 传入，传递给后端接口。
-        console.log(params, sorter, filter);
-        return Promise.resolve({
-          data: tableListDataSource,
-          success: true,
-        });
-      }}
-      rowKey="key"
-      pagination={{
-        showQuickJumper: true,
-      }}
-      search={{
-        layout: 'vertical',
-        defaultCollapsed: false,
-      }}
-      dateFormatter="string"
-      toolbar={{
-        title: '高级表格',
-        tooltip: '这是一个标题提示',
-      }}
-      toolBarRender={() => [
-        <ModalContainer />,
-        <Button type="primary" key="primary" onClick={() => {  _insBianApi.sendPublicRequest("test", 'testKey')  }}>查看日志</Button>,
-      ]}
-    />
-  );
-};
+class TableContainer extends React.Component {
+  render () {
+    console.log(this.props.modalReducer)
+    return (
+      <ProTable<TableListItem>
+        columns={columns}
+        request={(params, sorter, filter) => {
+          // 表单搜索项会从 params 传入，传递给后端接口。
+          console.log(params, sorter, filter);
+          return Promise.resolve({
+            data: tableListDataSource,
+            success: true,
+          });
+        }}
+        rowKey="key"
+        pagination={{
+          showQuickJumper: true,
+        }}
+        search={{
+          layout: 'vertical',
+          defaultCollapsed: false,
+        }}
+        dateFormatter="string"
+        toolbar={{
+          title: '高级表格',
+          tooltip: '这是一个标题提示',
+        }}
+        toolBarRender={() => [
+          <ModalContainer />,
+          <Button type="primary" key="primary" onClick={() => {  this.props.modalReducer.insUserInfo.fetchAccountInfo()  }}>查看日志</Button>,
+        ]}
+      />
+    )
+  }
+}
+          //<Button type="primary" key="primary" onClick={() => {  _insBianApi.sendPublicRequest(this.props.modalReducer.apiKey, this.props.modalReducer.apiSecretKey)  }}>查看日志</Button>,
         //<Button key="show" onClick={_insBianApi.sendPublicRequest("test", 'testKey')}>查看日志</Button>,
         //<Button key="show" onClick={() => { requestBianapi()}}>查看日志</Button>,
+function mapStateToProps (state) {
+  return {
+    modalReducer: state.modalReducer,
+  };
+}
+ 
+function mapDispatchToProps(dispatch) {
+  return {}
+  //return bindActionCreators ({ ACTION_MODAL_KEY }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer)
