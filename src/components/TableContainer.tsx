@@ -62,7 +62,15 @@ const columns: ProColumns<TableListItem>[] = [
   {
     title: '锁住货币量',
     dataIndex: 'locked',
-  }
+  },
+  {
+    title: '单价(USDT/BUSD)',
+    dataIndex: 'unitPrice',
+  },
+  {
+    title: '总价(USDT/BUSD)',
+    dataIndex: 'amount',
+  },
 ];
 
 class TableContainer extends React.Component {

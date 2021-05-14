@@ -9,22 +9,36 @@ export class bianBase {
         this.apiSecretKey = _apiSecretKey
     }
 
-    sendPublicRequest(_uri, _request){
-        console.log("Calling in the sendPublicRequest")
-        console.log("The key is as below")
-        console.log(this.apiKey)
-        console.log(this.apiSecretKey)
-        console.log(_uri)
-        console.log(_request)
-        reqwest({
-            url: '/api/v3/time',
-            type: 'json',
-            method: 'get',
-            contentType: 'application/json',
-            success: res => {
-              console.log(res);
-            },
-        });
+    getPublicRequest(_uri, _request={}){
+        let __strRequest;
+
+        let _arr = []
+        _.forEach(_request, function(_v, _k) {_arr.push(_k + "=" + _v)})
+
+        // Get the signed request
+        if(_.size(_arr > 0)){
+          return request('get', _uri , {
+              type: 'json',
+              contentType: 'application/json',
+          });
+        }else{
+          __strRequest = _.join(_arr, "&")
+          return request('get', _uri + '?' + __strRequest , {
+              type: 'json',
+              contentType: 'application/json',
+          });
+        }
+ 
+            
+        //reqwest({
+        //    url: '/api/v3/time',
+        //    type: 'json',
+        //    method: 'get',
+        //    contentType: 'application/json',
+        //    success: res => {
+        //      console.log(res);
+        //    },
+        //});
     }
 
     getHmacRequest(_uri, _request) {
