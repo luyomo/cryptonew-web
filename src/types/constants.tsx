@@ -20,3 +20,8 @@ export const MENU_INIT_STATE = {
 export const BINANCE_KEY_INPUT = "BINANCE_KEY_INPUT"
 export const BINANCE_INIT_STATE = { apiKey: "", apiSecretKey: ""}
 export const BINANCE_API_SERVER = "https://api.binance.com"
+
+//4. Table data
+export const BINANCE_TYPE_USER_BALANCE = "BINANCE_TYPE_USER_BALANCE"
+export const BINANCE_INIT_STAT_USER_BALANCE = {"balances": []}
+
