@@ -6,6 +6,11 @@
 ** VET
 github:  https://github.com/vechain/thor
 
+* Error
+reqwest.js:244 POST https://www.51yomo.net/api/v3/order/test?symbol=BNBUSDT&side=BUY&type=MARKET&quantity=1&timestamp=1620890803844&signature=9bfbe29c33e9152617b4f1c0ea55a31257c644edeaba98f1775ae1eb97308fc4 401 (Unauthorized)
+... ...
+bianapi.tsx:54 {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+
 * Reference
 ** Google authentication(OAUTH2)
 https://medium.com/swlh/react-js-authentication-with-google-oauth2-using-redux-295c51868afb

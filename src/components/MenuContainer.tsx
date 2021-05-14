@@ -5,6 +5,7 @@ import React, { useEffect, useState  } from "react"
 import { bindActionCreators          } from 'redux'
 import { connect                     } from "react-redux"
 import styled                          from "styled-components"
+import $ from 'jquery';
 
 // Local library
 import menu                            from './data/menu'
@@ -14,15 +15,22 @@ import TableContainer                  from './TableContainer'
 import GoogleOAuth2                    from './GoogleOAuth2'
 //import { TabsActionTypes             } from "../types/constants"
 import { ACTION_MENU_SWITCH          } from '../actions/menu'
+import { GOOGLE_INIT_STATE           } from '../types/constants'
+//import { getUserIP }                     from '../javascripts/util/util'
+import jwt_decode from "jwt-decode";
 
 // Assets
 import logo                            from '../assets/btcLogo.png'
 import userLogo                        from '../assets/user.jpg'
 
 class MenuContainer extends React.Component {
+  state = {ip: "0.0.0.0"}
   constructor(props) {
     super(props);
     const { dispatch  } = props
+ 
+    $.getJSON('https://api.ipify.org?format=json', function(data){ this.setState({ip: data.ip}) }.bind(this)  );
+
     this.onClickMenu = this.onClickMenu.bind(this);
   }
 
@@ -47,6 +55,13 @@ class MenuContainer extends React.Component {
     }else if(this.props.menuReducer.type === "TableContainer"){
       container = <TableContainer />
     }
+    let __clientInfo = this.props.googleReducer
+    if(this.props.googleReducer.ft === null || this.props.googleReducer.ft === undefined){
+      __clientInfo = GOOGLE_INIT_STATE
+    }
+    console.log(__clientInfo)
+    //var decoded = jwt_decode(__clientInfo.idToken)
+    //console.log(decoded);
 
     return (
       <div style={{ height: '100vh', }} >
@@ -55,7 +70,7 @@ class MenuContainer extends React.Component {
           logo={logo}
           title="加密货币实时新闻"
           rightContentRender={() => (
-              <div>{this.props.googleReducer.ft.Ue},欢迎来到加密货币实时新闻网 <img src={ this.props.googleReducer.ft.iJ } width="40" height="45" /></div>
+              <div>{__clientInfo.ft.Ue},欢迎来到加密货币实时新闻网 ({this.state.ip}) <img src={ __clientInfo.ft.iJ } width="40" height="45" /></div>
           )}
           menuFooterRender={(props) => {
             return (

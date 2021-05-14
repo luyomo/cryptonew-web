@@ -19,4 +19,4 @@ export const MENU_INIT_STATE = {
 //3. Modal key
 export const BINANCE_KEY_INPUT = "BINANCE_KEY_INPUT"
 export const BINANCE_INIT_STATE = { apiKey: "", apiSecretKey: ""}
-
+export const BINANCE_API_SERVER = "https://api.binance.com"

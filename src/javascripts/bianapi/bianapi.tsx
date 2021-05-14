@@ -1,4 +1,5 @@
 import reqwest                            from 'reqwest'
+import request                            from 'sync-request';
 import * as _                             from 'lodash'
 import CryptoJS                           from 'crypto-js'
 
@@ -22,11 +23,11 @@ export class bianBase {
     }
 
     getHmacRequest(_uri, _request) {
-        this.sendHmacRequest('get', _uri, _request)
+        return this.sendHmacRequest('get', _uri, _request)
     }
 
     postHmacRequest(_uri, _request) {
-        this.sendHmacRequest('post', _uri, _request)
+        return this.sendHmacRequest('post', _uri, _request)
     }
 
     sendHmacRequest(_method, _uri, _request) {
@@ -43,19 +44,33 @@ export class bianBase {
         // Get the signed request
         const __signature =  CryptoJS.HmacSHA256(__strRequest, this.apiSecretKey ).toString(CryptoJS.enc.Hex)
 
-        reqwest({
-            url: _uri + '?' + __strRequest + '&signature=' + __signature,
+        return request(_method, _uri + '?' + __strRequest + '&signature=' + __signature, {
             type: 'json',
-            method: _method,
             contentType: 'application/json',
             headers: { 'X-MBX-APIKEY': this.apiKey },
-            error: function (err) {
-                console.log(err.response)
-            },
-            success: res => {
-              console.log(res);
-            },
+            
         });
+
+        //return await new Promise(
+        //    (_resolve, _reject) => {
+        //      reqwest({
+        //          url: _uri + '?' + __strRequest + '&signature=' + __signature,
+        //          type: 'json',
+        //          method: _method,
+        //          contentType: 'application/json',
+        //          headers: { 'X-MBX-APIKEY': this.apiKey },
+        //          error: function (err) {
+        //              _reject(err)
+        //              return 
+        //              //console.log(err.response)
+        //          },
+        //          success: res => {
+        //            console.log(res);
+        //            _resolve(res)
+        //          },
+        //      });
+        //    }
+        //)
     }
 }
 
